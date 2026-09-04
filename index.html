@@ -37,7 +37,7 @@
                 <span class="badge bg-warning text-dark px-3 py-2 fs-6 fw-bold"><i class="fa-solid fa-lock-open me-1"></i> ফুল কন্ট্রোল মোড</span>
             </div>
 
-            <!-- ওয়েবসাইট বন্ধ/চালু করার কন্ট্রোল সেকশন -->
+            <!-- ওয়েবসাইট স্ট্যাটাস সেকশন -->
             <div class="row">
                 <div class="col-12">
                     <div class="card card-custom p-4 border-warning border-2">
@@ -98,25 +98,18 @@
                         <h5 class="section-header"><div class="d-inline-flex align-items-center"><i class="fa-solid fa-paper-plane text-warning me-2"></i>অর্ডার ও মেসেজ সেটিংস</div></h5>
                         
                         <div class="mb-3">
-                            <label class="form-label fw-bold">অর্ডার বাটন টেক্সট (পপআপের ভেতরের বাটনের লেখা):</label>
+                            <label class="form-label fw-bold">অর্ডার বাটন টেক্সট:</label>
                             <input type="text" id="cfg-btn-text" class="form-control border-warning fw-bold">
-                            <small class="text-muted">যে লেখাটি কাস্টমার পপআপের শেষ বাটনে দেখবে।</small>
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label fw-bold">অর্ডার রিসিভ করার হোয়াটসঅ্যাপ নম্বর (কান্ট্রি কোড সহ):</label>
+                            <label class="form-label fw-bold">অর্ডার রিসিভ করার হোয়াটসঅ্যাপ নম্বর:</label>
                             <input type="text" id="cfg-wa-num" class="form-control">
-                            <small class="text-muted">যেমন: 88018XXXXXXXX</small>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label fw-bold">মেসেজ ফরম্যাট (Dynamic Template):</label>
                             <textarea id="cfg-wa-msg-template" class="form-control" rows="5"></textarea>
-                            <small class="text-muted d-block mt-1">
-                                <b>ট্যাগ সমূহের ব্যবহার:</b><br>
-                                <code>{name}</code> = কাস্টমারের নাম | <code>{operator}</code> = অপারেটর<br>
-                                <code>{offer}</code> = অফারের বিবরণ | <code>{price}</code> = দাম | <code>{phone}</code> = কাস্টমারের নম্বর
-                            </small>
                         </div>
                         <button class="btn btn-gold w-100" onclick="saveWASettings()"><i class="fa-solid fa-floppy-disk me-2"></i>অর্ডার ও মেসেজ সেটিংস সেভ করুন</button>
                     </div>
@@ -128,8 +121,6 @@
                 <div class="col-12">
                     <div class="card card-custom p-4">
                         <h5 class="section-header"><i class="fa-solid fa-list-check text-warning me-2"></i>অপারেটর সিলেক্ট করে অফার এন্ট্রি সেকশন</h5>
-                        <p class="text-muted small">প্রথমে অপারেটর সিলেক্ট করুন, এরপর নিচে সেই অপারেটরের অফারগুলোর টেক্সট পেস্ট করুন।</p>
-
                         <div class="mb-3">
                             <label class="form-label fw-bold fs-5 text-primary">১. অফারের জন্য অপারেটর সিলেক্ট করুন:</label>
                             <select id="selected-operator" class="form-select form-select-lg border-warning fw-bold">
@@ -142,7 +133,6 @@
 
                         <div class="mb-3">
                             <label class="form-label fw-bold">২. ওই অপারেটরের অফারের তালিকা পেস্ট করুন:</label>
-                            <!-- এখানে প্লেসহোল্ডার/উদাহরণ একদম ফাঁকা করা হয়েছে -->
                             <textarea id="ai-text-input" class="form-control" rows="6"></textarea>
                         </div>
 
@@ -153,11 +143,82 @@
                 </div>
             </div>
 
-            <div class="card card-custom p-4">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h5 class="section-header mb-0"><i class="fa-solid fa-database text-warning me-2"></i>লাইভ অফারের তালিকা</h5>
-                    <button class="btn btn-sm btn-outline-danger" onclick="clearAllOffers()"><i class="fa-solid fa-trash me-1"></i>সব অফার একবারে মুছে ফেলুন</button>
+            <!-- অপারেটর অফার অন/অফ কন্ট্রোল প্যানেল -->
+            <div class="card card-custom p-4 border-info">
+                <h5 class="section-header text-info"><i class="fa-solid fa-toggle-on text-info me-2"></i>অপারেটর ভিত্তিক অফার চালু/বন্ধ (Status Control)</h5>
+                <div class="row g-3">
+                    <div class="col-md-3">
+                        <div class="p-3 border rounded bg-light">
+                            <h6 class="fw-bold">রবি (Robi)</h6>
+                            <select id="status-Robi" class="form-select form-select-sm mb-2" onchange="saveOperatorStatus('Robi')">
+                                <option value="active">🟢 চালু আছে</option>
+                                <option value="inactive">🔴 বন্ধ আছে</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="p-3 border rounded bg-light">
+                            <h6 class="fw-bold">এয়ারটেল (Airtel)</h6>
+                            <select id="status-Airtel" class="form-select form-select-sm mb-2" onchange="saveOperatorStatus('Airtel')">
+                                <option value="active">🟢 চালু আছে</option>
+                                <option value="inactive">🔴 বন্ধ আছে</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="p-3 border rounded bg-light">
+                            <h6 class="fw-bold">বাংলালিংক (Banglalink)</h6>
+                            <select id="status-Banglalink" class="form-select form-select-sm mb-2" onchange="saveOperatorStatus('Banglalink')">
+                                <option value="active">🟢 চালু আছে</option>
+                                <option value="inactive">🔴 বন্ধ আছে</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="p-3 border rounded bg-light">
+                            <h6 class="fw-bold">গ্রামীণফোন (GP)</h6>
+                            <select id="status-GP" class="form-select form-select-sm mb-2" onchange="saveOperatorStatus('GP')">
+                                <option value="active">🟢 চালু আছে</option>
+                                <option value="inactive">🔴 বন্ধ আছে</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
+            </div>
+
+            <!-- লাইভ অফারের তালিকা ও ম্যানেজমেন্ট -->
+            <div class="card card-custom p-4">
+                <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
+                    <h5 class="section-header mb-0"><i class="fa-solid fa-database text-warning me-2"></i>লাইভ অফারের তালিকা ও ম্যানেজমেন্ট</h5>
+                    
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-sm btn-outline-danger" onclick="clearSelectedOperatorOffers()"><i class="fa-solid fa-trash-can me-1"></i>সিলেক্টেড অপারেটরের সব মুছুন</button>
+                        <button class="btn btn-sm btn-danger" onclick="clearAllOffers()"><i class="fa-solid fa-trash me-1"></i>সব অফার মুছে ফেলুন</button>
+                    </div>
+                </div>
+
+                <!-- সার্চ এবং অপারেটর ফিল্টার বার -->
+                <div class="row mb-3 g-2">
+                    <div class="col-md-7">
+                        <div class="input-group">
+                            <span class="input-group-text bg-warning text-dark"><i class="fa-solid fa-magnifying-glass"></i></span>
+                            <input type="text" id="offer-search-input" class="form-control" placeholder="যেকোনো অফার সার্চ করুন (সকল অপারেটর থেকে সাপোর্ট করবে)..." onkeyup="renderAdminTable()">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <select id="filter-operator" class="form-select fw-bold" onchange="renderAdminTable()">
+                            <option value="ALL">সকল অপারেটর (All)</option>
+                            <option value="Robi">রবি (Robi)</option>
+                            <option value="Airtel">এয়ারটেল (Airtel)</option>
+                            <option value="Banglalink">বাংলালিংক (Banglalink)</option>
+                            <option value="GP">গ্রামীণফোন (GP)</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-outline-secondary w-100" onclick="resetFilter()"><i class="fa-solid fa-rotate-right me-1"></i>রিসেট</button>
+                    </div>
+                </div>
+
                 <div class="table-responsive">
                     <table class="table table-hover align-middle border">
                         <thead class="table-dark">
@@ -179,6 +240,47 @@
     </div>
 </div>
 
+<!-- অফার এডিট করার জন্য মডাল (Modal) -->
+<div class="modal fade" id="editOfferModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-warning">
+                <h5 class="modal-title fw-bold text-dark"><i class="fa-solid fa-pen-to-square me-2"></i>অফার এডিট করুন</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="edit-offer-id">
+                <div class="mb-3">
+                    <label class="form-label fw-bold">অপারেটর:</label>
+                    <select id="edit-offer-op" class="form-select">
+                        <option value="Robi">রবি (Robi)</option>
+                        <option value="Airtel">এয়ারটেল (Airtel)</option>
+                        <option value="Banglalink">বাংলালিংক (Banglalink)</option>
+                        <option value="GP">গ্রামীণফোন (GP)</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold">প্যাকেজ ডিটেইলস:</label>
+                    <input type="text" id="edit-offer-title" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold">মেয়াদ:</label>
+                    <input type="text" id="edit-offer-validity" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold">মূল্য (৳):</label>
+                    <input type="number" id="edit-offer-price" class="form-control">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">বাতিল</button>
+                <button type="button" class="btn btn-gold" onclick="updateOfferData()">সংরক্ষণ করুন</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
     function bnToEnDigits(str) {
         const bnDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
@@ -186,10 +288,8 @@
     }
 
     function saveSiteStatus() {
-        const siteStatus = document.getElementById('cfg-site-status').value;
-        const closeMsg = document.getElementById('cfg-site-close-msg').value;
-        localStorage.setItem('cfg_site_status', siteStatus);
-        localStorage.setItem('cfg_site_close_msg', closeMsg);
+        localStorage.setItem('cfg_site_status', document.getElementById('cfg-site-status').value);
+        localStorage.setItem('cfg_site_close_msg', document.getElementById('cfg-site-close-msg').value);
         alert('ওয়েবসাইট স্ট্যাটাস সফলভাবে সেভ করা হয়েছে!');
     }
 
@@ -207,6 +307,12 @@
         localStorage.setItem('cfg_wa_num', document.getElementById('cfg-wa-num').value);
         localStorage.setItem('cfg_wa_msg_template', document.getElementById('cfg-wa-msg-template').value);
         alert('অর্ডার ও মেসেজ সেটিংস সেভ করা হয়েছে!');
+    }
+
+    function saveOperatorStatus(opName) {
+        let statusVal = document.getElementById('status-' + opName).value;
+        localStorage.setItem('op_status_' + opName, statusVal);
+        alert(opName + ' অপারেটরের অফার স্ট্যাটাস আপডেট করা হয়েছে!');
     }
 
     function processSelectedOperatorOffers() {
@@ -259,54 +365,4 @@
         alert(`${selectedOperator} অপারেটরে মোট ${addedCount} টি অফার সফলভাবে যোগ করা হয়েছে!`);
     }
 
-    function renderAdminTable() {
-        const tbody = document.getElementById('admin-table-body');
-        const offers = JSON.parse(localStorage.getItem('myOffers')) || [];
-        tbody.innerHTML = '';
-
-        offers.forEach((item, index) => {
-            tbody.innerHTML += `
-                <tr>
-                    <td><span class="badge ${item.badgeBg}">${item.op}</span></td>
-                    <td class="fw-bold">${item.title}</td>
-                    <td>${item.validity}</td>
-                    <td class="text-success fw-bold">৳ ${item.price}</td>
-                    <td><button class="btn btn-sm btn-outline-danger" onclick="deleteSingleOffer(${index})"><i class="fa-solid fa-trash"></i> ডিলিট</button></td>
-                </tr>
-            `;
-        });
-    }
-
-    function deleteSingleOffer(index) {
-        let offers = JSON.parse(localStorage.getItem('myOffers')) || [];
-        offers.splice(index, 1);
-        localStorage.setItem('myOffers', JSON.stringify(offers));
-        renderAdminTable();
-    }
-
-    function clearAllOffers() {
-        if(confirm('সবগুলো অফার মুছে ফেলতে চান?')) {
-            localStorage.removeItem('myOffers');
-            renderAdminTable();
-        }
-    }
-
-    window.onload = function() {
-        document.getElementById('cfg-site-status').value = localStorage.getItem('cfg_site_status') || "open";
-        document.getElementById('cfg-site-close-msg').value = localStorage.getItem('cfg_site_close_msg') || "দুঃখিত! আমাদের সার্ভিস সাময়িকভাবে বন্ধ আছে। কিছুক্ষন পর আবার চেষ্টা করুন।";
-
-        document.getElementById('cfg-site-name').value = localStorage.getItem('cfg_site_name') || "SAYON CELL BD";
-        document.getElementById('cfg-support-text').value = localStorage.getItem('cfg_support_text') || "২৪/৭ লাইভ সাপোর্ট";
-        document.getElementById('cfg-hero-title').value = localStorage.getItem('cfg_hero_title') || "সেরা অফার বেছে নিন নিমিষেই ⚡";
-        document.getElementById('cfg-hero-sub').value = localStorage.getItem('cfg_hero_sub') || "আপনার নম্বর দিন এবং সরাসরি রিচার্জ করুন";
-        document.getElementById('cfg-notice-text').value = localStorage.getItem('cfg_notice_text') || "আজকের স্পেশাল ধামাকা অফার! ড্রাইভ প্যাকের রেট সবচেয়ে কম।";
-
-        document.getElementById('cfg-btn-text').value = localStorage.getItem('cfg_btn_text') || "অর্ডার নিশ্চিত করুন";
-        document.getElementById('cfg-wa-num').value = localStorage.getItem('cfg_wa_num') || "8801872900153";
-        document.getElementById('cfg-wa-msg-template').value = localStorage.getItem('cfg_wa_msg_template') || `السلام عليكم!\nআমি ওয়েবসাইট থেকে অফার অর্ডার করতে চাই:\n\n👤 *গ্রাহকের নাম:* {name}\n📱 *অপারেটর:* {operator}\n📦 *অফার:* {offer}\n💵 *মূল্য:* ৳{price}\n📲 *রিচার্জের নম্বর:* {phone}`;
-
-        renderAdminTable();
-    };
-</script>
-</body>
-    </html>
+    
