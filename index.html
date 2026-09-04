@@ -37,6 +37,7 @@
                 <span class="badge bg-warning text-dark px-3 py-2 fs-6 fw-bold"><i class="fa-solid fa-lock-open me-1"></i> ফুল কন্ট্রোল মোড</span>
             </div>
 
+            <!-- ওয়েবসাইট বন্ধ/চালু করার কন্ট্রোল সেকশন -->
             <div class="row">
                 <div class="col-12">
                     <div class="card card-custom p-4 border-warning border-2">
@@ -51,7 +52,7 @@
                             </div>
                             <div class="col-md-8 mb-3">
                                 <label class="form-label fw-bold">ওয়েবসাইট বন্ধ থাকলে দেখানোর নোটিশ:</label>
-                                <input type="text" id="cfg-site-close-msg" class="form-control" placeholder="দুঃখিত! আমাদের সার্ভিস সাময়িকভাবে বন্ধ আছে। কিছুক্ষন পর আবার চেষ্টা করুন।">
+                                <input type="text" id="cfg-site-close-msg" class="form-control">
                             </div>
                             <div class="col-12 mt-2">
                                 <button class="btn btn-gold w-100" onclick="saveSiteStatus()"><i class="fa-solid fa-floppy-disk me-2"></i>ওয়েবসাইট স্ট্যাটাস সেভ করুন</button>
@@ -62,57 +63,67 @@
             </div>
 
             <div class="row">
+                <!-- ব্র্যান্ডিং সেটিং -->
                 <div class="col-lg-6">
                     <div class="card card-custom p-4">
                         <h5 class="section-header"><i class="fa-solid fa-globe text-warning me-2"></i>ওয়েবসাইট ব্র্যান্ডিং ও টেক্সট সেটিং</h5>
                         
                         <div class="mb-3">
                             <label class="form-label fw-bold">ব্র্যান্ডের নাম (Header Title):</label>
-                            <input type="text" id="cfg-site-name" class="form-control" placeholder="SAYON CELL BD">
+                            <input type="text" id="cfg-site-name" class="form-control">
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-bold">সাপোর্ট টেক্সট (Header Right Badge):</label>
-                            <input type="text" id="cfg-support-text" class="form-control" placeholder="২৪/৭ লাইভ সাপোর্ট">
+                            <input type="text" id="cfg-support-text" class="form-control">
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-bold">ব্যানার হেডিং (Hero Title):</label>
-                            <input type="text" id="cfg-hero-title" class="form-control" placeholder="সেরা অফার বেছে নিন নিমিষেই ⚡">
+                            <input type="text" id="cfg-hero-title" class="form-control">
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-bold">ব্যানার বিবরণ (Hero Subtitle):</label>
-                            <input type="text" id="cfg-hero-sub" class="form-control" placeholder="আপনার নম্বর দিন এবং সরাসরি হোয়াটসঅ্যাপ থেকে ড্রাইভ রিচার্জ করুন">
+                            <input type="text" id="cfg-hero-sub" class="form-control">
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-bold">লাইভ নোটিশ বার টেক্সট:</label>
-                            <textarea id="cfg-notice-text" class="form-control" rows="2" placeholder="আজকের বিশেষ ধামাকা অফার চলছে..."></textarea>
+                            <textarea id="cfg-notice-text" class="form-control" rows="2"></textarea>
                         </div>
                         <button class="btn btn-gold w-100" onclick="saveBrandingSettings()"><i class="fa-solid fa-floppy-disk me-2"></i>ব্র্যান্ডিং তথ্য সেভ করুন</button>
                     </div>
                 </div>
 
+                <!-- হোয়াটসঅ্যাপ ও বাটন সেটিং -->
                 <div class="col-lg-6">
                     <div class="card card-custom p-4">
-                        <h5 class="section-header"><i class="fa-brands fa-whatsapp text-warning me-2"></i>হোয়াটসঅ্যাপ ও মেসেজ সেটিংস</h5>
+                        <h5 class="section-header"><div class="d-inline-flex align-items-center"><i class="fa-solid fa-paper-plane text-warning me-2"></i>অর্ডার ও মেসেজ সেটিংস</div></h5>
                         
                         <div class="mb-3">
-                            <label class="form-label fw-bold">হোয়াটসঅ্যাপ নম্বর (কান্ট্রি কোড সহ):</label>
-                            <input type="text" id="cfg-wa-num" class="form-control" placeholder="8801872900153">
+                            <label class="form-label fw-bold">অর্ডার বাটন টেক্সট (পপআপের ভেতরের বাটনের লেখা):</label>
+                            <input type="text" id="cfg-btn-text" class="form-control border-warning fw-bold">
+                            <small class="text-muted">যে লেখাটি কাস্টমার পপআপের শেষ বাটনে দেখবে।</small>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">অর্ডার রিসিভ করার হোয়াটসঅ্যাপ নম্বর (কান্ট্রি কোড সহ):</label>
+                            <input type="text" id="cfg-wa-num" class="form-control">
                             <small class="text-muted">যেমন: 88018XXXXXXXX</small>
                         </div>
+
                         <div class="mb-3">
-                            <label class="form-label fw-bold">হোয়াটসঅ্যাপ মেসেজ ফরম্যাট (Dynamic Template):</label>
-                            <textarea id="cfg-wa-msg-template" class="form-control" rows="6" placeholder="মেসেজের ফরম্যাট লিখুন..."></textarea>
+                            <label class="form-label fw-bold">মেসেজ ফরম্যাট (Dynamic Template):</label>
+                            <textarea id="cfg-wa-msg-template" class="form-control" rows="5"></textarea>
                             <small class="text-muted d-block mt-1">
                                 <b>ট্যাগ সমূহের ব্যবহার:</b><br>
                                 <code>{name}</code> = কাস্টমারের নাম | <code>{operator}</code> = অপারেটর<br>
                                 <code>{offer}</code> = অফারের বিবরণ | <code>{price}</code> = দাম | <code>{phone}</code> = কাস্টমারের নম্বর
                             </small>
                         </div>
-                        <button class="btn btn-gold w-100" onclick="saveWASettings()"><i class="fa-solid fa-paper-plane me-2"></i>হোয়াটসঅ্যাপ সেটিংস সেভ করুন</button>
+                        <button class="btn btn-gold w-100" onclick="saveWASettings()"><i class="fa-solid fa-floppy-disk me-2"></i>অর্ডার ও মেসেজ সেটিংস সেভ করুন</button>
                     </div>
                 </div>
             </div>
 
+            <!-- অফার এন্ট্রি -->
             <div class="row">
                 <div class="col-12">
                     <div class="card card-custom p-4">
@@ -131,10 +142,8 @@
 
                         <div class="mb-3">
                             <label class="form-label fw-bold">২. ওই অপারেটরের অফারের তালিকা পেস্ট করুন:</label>
-                            <textarea id="ai-text-input" class="form-control" rows="6" placeholder="উদাহরণ:
-১. ২০ GB + ৪০০ মিনিট — ৪৪৮ টাকা — ৩০ দিন
-২. ৩০ GB — ৩৮০ টাকা — ৩০ দিন
-৩. ৫০০ মিনিট — ৩০ মেয়াদী — ৩২০ টাকা"></textarea>
+                            <!-- এখানে প্লেসহোল্ডার/উদাহরণ একদম ফাঁকা করা হয়েছে -->
+                            <textarea id="ai-text-input" class="form-control" rows="6"></textarea>
                         </div>
 
                         <button class="btn btn-gold w-100 fs-5" onclick="processSelectedOperatorOffers()">
@@ -176,7 +185,6 @@
         return str.replace(/[০-৯]/g, d => bnDigits.indexOf(d));
     }
 
-    // ১. সাইট স্ট্যাটাস আলাদা সেভ
     function saveSiteStatus() {
         const siteStatus = document.getElementById('cfg-site-status').value;
         const closeMsg = document.getElementById('cfg-site-close-msg').value;
@@ -185,7 +193,6 @@
         alert('ওয়েবসাইট স্ট্যাটাস সফলভাবে সেভ করা হয়েছে!');
     }
 
-    // ২. ব্র্যান্ডিং তথ্য সেভ
     function saveBrandingSettings() {
         localStorage.setItem('cfg_site_name', document.getElementById('cfg-site-name').value);
         localStorage.setItem('cfg_support_text', document.getElementById('cfg-support-text').value);
@@ -195,14 +202,13 @@
         alert('ব্র্যান্ডিং তথ্য সেভ করা হয়েছে!');
     }
 
-    // ৩. হোয়াটসঅ্যাপ সেটিংস সেভ
     function saveWASettings() {
+        localStorage.setItem('cfg_btn_text', document.getElementById('cfg-btn-text').value);
         localStorage.setItem('cfg_wa_num', document.getElementById('cfg-wa-num').value);
         localStorage.setItem('cfg_wa_msg_template', document.getElementById('cfg-wa-msg-template').value);
-        alert('হোয়াটসঅ্যাপ সেটিংস ও মেসেজ টেমপ্লেট সেভ করা হয়েছে!');
+        alert('অর্ডার ও মেসেজ সেটিংস সেভ করা হয়েছে!');
     }
 
-    // ৪. অফার প্রসেসিং logic
     function processSelectedOperatorOffers() {
         let text = document.getElementById('ai-text-input').value;
         let selectedOperator = document.getElementById('selected-operator').value;
@@ -292,9 +298,10 @@
         document.getElementById('cfg-site-name').value = localStorage.getItem('cfg_site_name') || "SAYON CELL BD";
         document.getElementById('cfg-support-text').value = localStorage.getItem('cfg_support_text') || "২৪/৭ লাইভ সাপোর্ট";
         document.getElementById('cfg-hero-title').value = localStorage.getItem('cfg_hero_title') || "সেরা অফার বেছে নিন নিমিষেই ⚡";
-        document.getElementById('cfg-hero-sub').value = localStorage.getItem('cfg_hero_sub') || "আপনার নম্বর দিন এবং সরাসরি হোয়াটসঅ্যাপ থেকে ড্রাইভ রিচার্জ করুন";
+        document.getElementById('cfg-hero-sub').value = localStorage.getItem('cfg_hero_sub') || "আপনার নম্বর দিন এবং সরাসরি রিচার্জ করুন";
         document.getElementById('cfg-notice-text').value = localStorage.getItem('cfg_notice_text') || "আজকের স্পেশাল ধামাকা অফার! ড্রাইভ প্যাকের রেট সবচেয়ে কম।";
 
+        document.getElementById('cfg-btn-text').value = localStorage.getItem('cfg_btn_text') || "অর্ডার নিশ্চিত করুন";
         document.getElementById('cfg-wa-num').value = localStorage.getItem('cfg_wa_num') || "8801872900153";
         document.getElementById('cfg-wa-msg-template').value = localStorage.getItem('cfg_wa_msg_template') || `السلام عليكم!\nআমি ওয়েবসাইট থেকে অফার অর্ডার করতে চাই:\n\n👤 *গ্রাহকের নাম:* {name}\n📱 *অপারেটর:* {operator}\n📦 *অফার:* {offer}\n💵 *মূল্য:* ৳{price}\n📲 *রিচার্জের নম্বর:* {phone}`;
 
@@ -302,5 +309,5 @@
     };
 </script>
 </body>
-  </html>
+</html>
 
