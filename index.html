@@ -1,339 +1,335 @@
-<!DOCTYPE html>
-<html lang="bn">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAYON CELL BD - Admin Panel</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <style>
-        body { background-color: #f3f4f6; font-family: 'Segoe UI', sans-serif; }
-        .sidebar { background: #111827; color: #fff; min-height: 100vh; padding: 20px; }
-        .sidebar-brand { font-size: 1.4rem; font-weight: 800; color: #ffc107; border-bottom: 1px solid #374151; padding-bottom: 15px; }
-        .card-custom { border: none; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); background: #fff; margin-bottom: 25px; }
-        .btn-gold { background: #ffc107; font-weight: bold; color: #000; border: none; border-radius: 10px; padding: 12px; }
-        .btn-gold:hover { background: #e0a800; }
-        .section-header { border-left: 4px solid #ffc107; padding-left: 10px; font-weight: 700; margin-bottom: 20px; }
 
-        .draft-badge { display:inline-flex; align-items:center; gap:6px; }
-        .save-one { white-space:nowrap; }
-        .pending-row { background:#fff8e1 !important; }
-        .operator-control { border:1px solid #e5e7eb; border-radius:12px; padding:12px; background:#fff; }
-        .table-toolbar { background:#f9fafb; border-radius:12px; padding:12px; }
-    </style>
-</head>
-<body>
+<!DOCTYPE html>  <html lang="bn">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>SAYON CELL BD - Admin Panel</title>  
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">  
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">  
+    <style>  
+        body { background-color: #f3f4f6; font-family: 'Segoe UI', sans-serif; }  
+        .sidebar { background: #111827; color: #fff; min-height: 100vh; padding: 20px; }  
+        .sidebar-brand { font-size: 1.4rem; font-weight: 800; color: #ffc107; border-bottom: 1px solid #374151; padding-bottom: 15px; }  
+        .card-custom { border: none; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); background: #fff; margin-bottom: 25px; }  
+        .btn-gold { background: #ffc107; font-weight: bold; color: #000; border: none; border-radius: 10px; padding: 12px; }  
+        .btn-gold:hover { background: #e0a800; }  
+        .section-header { border-left: 4px solid #ffc107; padding-left: 10px; font-weight: 700; margin-bottom: 20px; }  
+    </style>  
+</head>  
+<body>  <div class="container-fluid">  
+    <div class="row">  
+        <div class="col-md-2 sidebar d-none d-md-block">  
+            <div class="sidebar-brand mb-4">  
+                <i class="fa-solid fa-sliders text-warning me-2"></i>SAYON MASTER  
+            </div>  
+            <ul class="nav nav-pills flex-column">  
+                <li class="nav-item mb-2">  
+                    <a href="#" class="nav-link active bg-warning text-dark fw-bold"><i class="fa-solid fa-gears me-2"></i>অল ইন ওয়ান কন্ট্রোল</a>  
+                </li>  
+            </ul>  
+        </div>  <div class="col-md-10 p-4">  
+        <div class="d-flex justify-content-between align-items-center mb-4">  
+            <h3 class="fw-bold mb-0">অ্যাডমিন কন্ট্রোল প্যানেল</h3>  
+            <span class="badge bg-warning text-dark px-3 py-2 fs-6 fw-bold"><i class="fa-solid fa-lock-open me-1"></i> ফুল কন্ট্রোল মোড</span>  
+        </div>  
 
-<div class="container-fluid">
-    <div class="row">
-        <!-- সাইডবার navigation -->
-        <div class="col-md-2 sidebar d-none d-md-block">
-            <div class="sidebar-brand mb-4">
-                <i class="fa-solid fa-sliders text-warning me-2"></i>SAYON MASTER
-            </div>
-            <ul class="nav nav-pills flex-column">
-                <li class="nav-item mb-2">
-                    <a href="#" class="nav-link active bg-warning text-dark fw-bold"><i class="fa-solid fa-gears me-2"></i>অল ইন ওয়ান কন্ট্রোল</a>
-                </li>
-            </ul>
-        </div>
+        <!-- ওয়েবসাইট বন্ধ/চালু করার কন্ট্রোল সেকশন -->  
+        <div class="row">  
+            <div class="col-12">  
+                <div class="card card-custom p-4 border-warning border-2">  
+                    <h5 class="section-header text-danger"><i class="fa-solid fa-power-off text-danger me-2"></i>ওয়েবসাইট স্ট্যাটাস (ওয়েবসাইট চালু / বন্ধ নিয়ন্ত্রণ)</h5>  
+                    <div class="row align-items-center">  
+                        <div class="col-md-4 mb-3 mb-md-0">  
+                            <label class="form-label fw-bold">ওয়েবসাইট অবস্থা সিলেক্ট করুন:</label>  
+                            <select id="cfg-site-status" class="form-select border-warning fw-bold">  
+                                <option value="open">🟢 ওয়েবসাইট চালু রাখুন (Open)</option>  
+                                <option value="closed">🔴 ওয়েবসাইট বন্ধ রাখুন (Closed / Maintenance)</option>  
+                            </select>  
+                        </div>  
+                        <div class="col-md-8 mb-3">  
+                            <label class="form-label fw-bold">ওয়েবসাইট বন্ধ থাকলে দেখানোর নোটিশ:</label>  
+                            <input type="text" id="cfg-site-close-msg" class="form-control">  
+                        </div>  
+                        <div class="col-12 mt-2">  
+                            <button class="btn btn-gold w-100" onclick="saveSiteStatus()"><i class="fa-solid fa-floppy-disk me-2"></i>ওয়েবসাইট স্ট্যাটাস সেভ করুন</button>  
+                        </div>  
+                    </div>  
+                </div>  
+            </div>  
+        </div>  
 
-        <div class="col-md-10 p-4">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h3 class="fw-bold mb-0">অ্যাডমিন কন্ট্রোল প্যানেল</h3>
-                <span class="badge bg-warning text-dark px-3 py-2 fs-6 fw-bold"><i class="fa-solid fa-lock-open me-1"></i> ফুল কন্ট্রোল মোড</span>
-            </div>
+        <div class="row">  
+            <!-- ব্র্যান্ডিং সেটিং -->  
+            <div class="col-lg-6">  
+                <div class="card card-custom p-4">  
+                    <h5 class="section-header"><i class="fa-solid fa-globe text-warning me-2"></i>ওয়েবসাইট ব্র্যান্ডিং ও টেক্সট সেটিং</h5>  
+                      
+                    <div class="mb-3">  
+                        <label class="form-label fw-bold">ব্র্যান্ডের নাম (Header Title):</label>  
+                        <input type="text" id="cfg-site-name" class="form-control">  
+                    </div>  
+                    <div class="mb-3">  
+                        <label class="form-label fw-bold">সাপোর্ট টেক্সট (Header Right Badge):</label>  
+                        <input type="text" id="cfg-support-text" class="form-control">  
+                    </div>  
+                    <div class="mb-3">  
+                        <label class="form-label fw-bold">ব্যানার হেডিং (Hero Title):</label>  
+                        <input type="text" id="cfg-hero-title" class="form-control">  
+                    </div>  
+                    <div class="mb-3">  
+                        <label class="form-label fw-bold">ব্যানার বিবরণ (Hero Subtitle):</label>  
+                        <input type="text" id="cfg-hero-sub" class="form-control">  
+                    </div>  
+                    <div class="mb-3">  
+                        <label class="form-label fw-bold">লাইভ নোটিশ বার টেক্সট:</label>  
+                        <textarea id="cfg-notice-text" class="form-control" rows="2"></textarea>  
+                    </div>  
+                    <button class="btn btn-gold w-100" onclick="saveBrandingSettings()"><i class="fa-solid fa-floppy-disk me-2"></i>ব্র্যান্ডিং তথ্য সেভ করুন</button>  
+                </div>  
+            </div>  
 
-            <!-- ওয়েবসাইট বন্ধ/চালু করার কন্ট্রোল সেকশন -->
-            <div class="row">
-                <div class="col-12">
-                    <div class="card card-custom p-4 border-warning border-2">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h5 class="section-header text-danger mb-0"><i class="fa-solid fa-power-off text-danger me-2"></i>ওয়েবসাইট স্ট্যাটাস</h5>
-                            <span class="badge bg-light text-dark border draft-badge"><i class="fa-solid fa-pen"></i> Draft — Save না করা পর্যন্ত Website বদলাবে না</span>
-                        </div>
-                        <div class="row align-items-end g-3">
-                            <div class="col-md-5">
-                                <label class="form-label fw-bold">ওয়েবসাইট অবস্থা</label>
-                                <select id="cfg-site-status" class="form-select border-warning fw-bold">
-                                    <option value="open">🟢 ওয়েবসাইট চালু রাখুন (Open)</option>
-                                    <option value="closed">🔴 ওয়েবসাইট বন্ধ রাখুন (Closed / Maintenance)</option>
-                                </select>
-                                <button class="btn btn-gold btn-sm w-100 mt-2 save-one" onclick="saveOneSetting('cfg_site_status')"><i class="fa-solid fa-floppy-disk me-1"></i>এই অপশন Save</button>
-                            </div>
-                            <div class="col-md-7">
-                                <label class="form-label fw-bold">ওয়েবসাইট বন্ধ থাকলে দেখানোর নোটিশ</label>
-                                <input type="text" id="cfg-site-close-msg" class="form-control" placeholder="দুঃখিত! আমাদের সার্ভিস সাময়িকভাবে বন্ধ আছে। কিছুক্ষন পর আবার চেষ্টা করুন।">
-                                <button class="btn btn-gold btn-sm w-100 mt-2 save-one" onclick="saveOneSetting('cfg_site_close_msg')"><i class="fa-solid fa-floppy-disk me-1"></i>এই অপশন Save</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <!-- হোয়াটসঅ্যাপ ও বাটন সেটিং -->  
+            <div class="col-lg-6">  
+                <div class="card card-custom p-4">  
+                    <h5 class="section-header"><div class="d-inline-flex align-items-center"><i class="fa-solid fa-paper-plane text-warning me-2"></i>অর্ডার ও মেসেজ সেটিংস</div></h5>  
+                      
+                    <div class="mb-3">  
+                        <label class="form-label fw-bold">অর্ডার বাটন টেক্সট (পপআপের ভেতরের বাটনের লেখা):</label>  
+                        <input type="text" id="cfg-btn-text" class="form-control border-warning fw-bold">  
+                        <small class="text-muted">যে লেখাটি কাস্টমার পপআপের শেষ বাটনে দেখবে।</small>  
+                    </div>  
 
-            <!-- ওয়েবসাইট ব্র্যান্ডিং ও হোয়াটসঅ্যাপ সেটিং -->
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="card card-custom p-4">
-                        <h5 class="section-header"><i class="fa-solid fa-globe text-warning me-2"></i>ওয়েবসাইট ব্র্যান্ডিং ও টেক্সট সেটিং</h5>
-                        
-                        <div class="mb-3">
-                            <label class="form-label fw-bold">ব্র্যান্ডের নাম (Header Title):</label>
-                            <input type="text" id="cfg-site-name" class="form-control" placeholder="SAYON CELL BD">
-                            <button class="btn btn-outline-dark btn-sm w-100 mt-2 save-one" onclick="saveOneSetting('cfg-site-name')"><i class="fa-solid fa-floppy-disk me-1"></i>এই অপশন Save</button>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label fw-bold">সাপোর্ট টেক্সট (Header Right Badge):</label>
-                            <input type="text" id="cfg-support-text" class="form-control" placeholder="২৪/৭ লাইভ সাপোর্ট">
-                            <button class="btn btn-outline-dark btn-sm w-100 mt-2 save-one" onclick="saveOneSetting('cfg-support-text')"><i class="fa-solid fa-floppy-disk me-1"></i>এই অপশন Save</button>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label fw-bold">ব্যানার হেডিং (Hero Title):</label>
-                            <input type="text" id="cfg-hero-title" class="form-control" placeholder="সেরা অফার বেছে নিন নিমিষেই ⚡">
-                            <button class="btn btn-outline-dark btn-sm w-100 mt-2 save-one" onclick="saveOneSetting('cfg-hero-title')"><i class="fa-solid fa-floppy-disk me-1"></i>এই অপশন Save</button>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label fw-bold">ব্যানার বিবরণ (Hero Subtitle):</label>
-                            <input type="text" id="cfg-hero-sub" class="form-control" placeholder="আপনার নম্বর দিন এবং সরাসরি হোয়াটসঅ্যাপ থেকে ড্রাইভ রিচার্জ করুন">
-                            <button class="btn btn-outline-dark btn-sm w-100 mt-2 save-one" onclick="saveOneSetting('cfg-hero-sub')"><i class="fa-solid fa-floppy-disk me-1"></i>এই অপশন Save</button>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label fw-bold">লাইভ নোটিশ বার টেক্সট:</label>
-                            <textarea id="cfg-notice-text" class="form-control" rows="2" placeholder="আজকের বিশেষ ধামাকা অফার চলছে..."></textarea>
-                            <button class="btn btn-outline-dark btn-sm w-100 mt-2 save-one" onclick="saveOneSetting('cfg-notice-text')"><i class="fa-solid fa-floppy-disk me-1"></i>এই অপশন Save</button>
-                        </div>
-                    </div>
-                </div>
+                    <div class="mb-3">  
+                        <label class="form-label fw-bold">অর্ডার রিসিভ করার হোয়াটসঅ্যাপ নম্বর (কান্ট্রি কোড সহ):</label>  
+                        <input type="text" id="cfg-wa-num" class="form-control">  
+                        <small class="text-muted">যেমন: 88018XXXXXXXX</small>  
+                    </div>  
 
-                <div class="col-lg-6">
-                    <div class="card card-custom p-4">
-                        <h5 class="section-header"><i class="fa-brands fa-whatsapp text-warning me-2"></i>হোয়াটসঅ্যাপ ও মেসেজ সেটিংস</h5>
-                        
-                        <div class="mb-3">
-                            <label class="form-label fw-bold">হোয়াটসঅ্যাপ নম্বর (কান্ট্রি কোড সহ):</label>
-                            <input type="text" id="cfg-wa-num" class="form-control" placeholder="8801872900153">
-                            <small class="text-muted">যেমন: 88018XXXXXXXX</small>
-                            <button class="btn btn-outline-dark btn-sm w-100 mt-2 save-one" onclick="saveOneSetting('cfg-wa-num')"><i class="fa-solid fa-floppy-disk me-1"></i>এই অপশন Save</button>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label fw-bold">হোয়াটসঅ্যাপ মেসেজ ফরম্যাট (Dynamic Template):</label>
-                            <textarea id="cfg-wa-msg-template" class="form-control" rows="6" placeholder="মেসেজের ফরম্যাট লিখুন..."></textarea>
-                            <small class="text-muted d-block mt-1">
-                                <b>ট্যাগ সমূহের ব্যবহার:</b><br>
-                                <code>{operator}</code> = অপারেটর | <code>{offer}</code> = অফারের বিবরণ<br>
-                                <code>{price}</code> = দাম | <code>{phone}</code> = কাস্টমারের নম্বর
-                            </small>
-                            <button class="btn btn-outline-dark btn-sm w-100 mt-2 save-one" onclick="saveOneSetting('cfg-wa-msg-template')"><i class="fa-solid fa-floppy-disk me-1"></i>এই অপশন Save</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                    <div class="mb-3">  
+                        <label class="form-label fw-bold">মেসেজ ফরম্যাট (Dynamic Template):</label>  
+                        <textarea id="cfg-wa-msg-template" class="form-control" rows="5"></textarea>  
+                        <small class="text-muted d-block mt-1">  
+                            <b>ট্যাগ সমূহের ব্যবহার:</b><br>  
+                            <code>{name}</code> = কাস্টমারের নাম | <code>{operator}</code> = অপারেটর<br>  
+                            <code>{offer}</code> = অফারের বিবরণ | <code>{price}</code> = দাম | <code>{phone}</code> = কাস্টমারের নম্বর  
+                        </small>  
+                    </div>  
+                    <button class="btn btn-gold w-100" onclick="saveWASettings()"><i class="fa-solid fa-floppy-disk me-2"></i>অর্ডার ও মেসেজ সেটিংস সেভ করুন</button>  
+                </div>  
+            </div>  
+        </div>  
 
-            <!-- অপারেটর চালু/বন্ধ ও নতুন অফার এন্ট্রি -->
-            <div class="row">
-                <div class="col-12">
-                    <div class="card card-custom p-4">
-                        <h5 class="section-header"><i class="fa-solid fa-list-check text-warning me-2"></i>অপারেটর সিলেক্ট করে অফার এন্ট্রি</h5>
-                        <p class="text-muted small">এখানে করা Add/Edit/Delete পরিবর্তন Draft-এ থাকবে। নিচের <b>অফার পরিবর্তন Save</b> না করা পর্যন্ত Website/User Panel-এর লাইভ অফার বদলাবে না।</p>
+        <!-- অফার এন্ট্রি -->  
+        <div class="row">  
+            <div class="col-12">  
+                <div class="card card-custom p-4">  
+                    <h5 class="section-header"><i class="fa-solid fa-list-check text-warning me-2"></i>অপারেটর সিলেক্ট করে অফার এন্ট্রি সেকশন</h5>  
+                    <p class="text-muted small">প্রথমে অপারেটর সিলেক্ট করুন, এরপর নিচে সেই অপারেটরের অফারগুলোর টেক্সট পেস্ট করুন।</p>  
 
-                        <div class="row g-3 mb-4" id="operator-controls"></div>
+                    <div class="mb-3">  
+                        <label class="form-label fw-bold fs-5 text-primary">১. অফারের জন্য অপারেটর সিলেক্ট করুন:</label>  
+                        <select id="selected-operator" class="form-select form-select-lg border-warning fw-bold">  
+                            <option value="Robi" selected>রবি (Robi)</option>  
+                            <option value="Airtel">এয়ারটেল (Airtel)</option>  
+                            <option value="Banglalink">বাংলালিংক (Banglalink)</option>  
+                            <option value="GP">গ্রামীণফোন (Grameenphone)</option>  
+                        </select>  
+                    </div>  
 
-                        <div class="mb-3">
-                            <label class="form-label fw-bold fs-5 text-primary">১. অফারের জন্য অপারেটর সিলেক্ট করুন:</label>
-                            <select id="selected-operator" class="form-select form-select-lg border-warning fw-bold">
-                                <option value="Robi" selected>রবি (Robi)</option>
-                                <option value="Airtel">এয়ারটেল (Airtel)</option>
-                                <option value="Banglalink">বাংলালিংক (Banglalink)</option>
-                                <option value="GP">গ্রামীণফোন (Grameenphone)</option>
-                            </select>
-                        </div>
+                    <div class="mb-3">  
+                        <label class="form-label fw-bold">২. ওই অপারেটরের অফারের তালিকা পেস্ট করুন:</label>  
+                        <textarea id="ai-text-input" class="form-control" rows="6"></textarea>  
+                    </div>  
 
-                        <div class="mb-3">
-                            <label class="form-label fw-bold">২. ওই অপারেটরের অফারের তালিকা পেস্ট করুন:</label>
-                            <textarea id="ai-text-input" class="form-control" rows="6" placeholder="উদাহরণ:
-১. ২০ GB + ৪০০ মিনিট — ৪৪৮ টাকা — ৩০ দিন
-২. ৩০ GB — ৩৮০ টাকা — ৩০ দিন
-৩. ৫০০ মিনিট — ৩০ মেয়াদী — ৩২০ টাকা"></textarea>
-                        </div>
+                    <button class="btn btn-gold w-100 fs-5" onclick="processSelectedOperatorOffers()">  
+                        <i class="fa-solid fa-plus-circle me-2"></i>সিলেক্ট করা অপারেটরে অফার যুক্ত করুন  
+                    </button>  
+                </div>  
+            </div>  
+        </div>  
 
-                        <button class="btn btn-outline-primary w-100 fs-5 mb-2" onclick="processSelectedOperatorOffers()">
-                            <i class="fa-solid fa-plus-circle me-2"></i>সিলেক্ট করা অপারেটরে Draft অফার যুক্ত করুন
-                        </button>
-                        <button class="btn btn-gold w-100 fs-5" onclick="saveOffers()">
-                            <i class="fa-solid fa-floppy-disk me-2"></i>অফার পরিবর্তন Save করুন — Website/User Panel Update
-                        </button>
-                    </div>
-                </div>
-            </div>
+        <!-- লাইভ অফার টেবিল এবং সার্চ বার -->  
+        <div class="card card-custom p-4">  
+            <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">  
+                <h5 class="section-header mb-0"><i class="fa-solid fa-database text-warning me-2"></i>লাইভ অফারের তালিকা</h5>  
+                  
+                <!-- সার্চ বার যুক্ত করা হয়েছে -->  
+                <div class="flex-grow-1 mx-md-3" style="max-width: 350px;">  
+                    <div class="input-group">  
+                        <span class="input-group-text bg-warning border-warning"><i class="fa-solid fa-magnifying-glass"></i></span>  
+                        <input type="text" id="search-input" class="form-control border-warning" placeholder="অফার বা অপারেটর খুঁজুন..." onkeyup="renderAdminTable()">  
+                    </div>  
+                </div>  
 
-            <!-- Draft অফার টেবিল ও ফিল্টার -->
-            <div class="card card-custom p-4">
-                <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
-                    <div>
-                        <h5 class="section-header mb-1"><i class="fa-solid fa-database text-warning me-2"></i>অফারের Draft তালিকা</h5>
-                        <div class="small text-muted">Draft পরিবর্তনগুলো শুধু Admin Panel-এ দেখা যাবে। Save করলে তবেই Live হবে।</div>
-                    </div>
-                    <button class="btn btn-sm btn-outline-danger" onclick="clearAllOffers()"><i class="fa-solid fa-trash me-1"></i>Draft-এর সব অফার মুছে ফেলুন</button>
-                </div>
-                <div class="table-toolbar mb-3">
-                    <div class="row g-2">
-                        <div class="col-md-7"><input id="offer-search" class="form-control" placeholder="🔎 অফার সার্চ করুন..." oninput="renderAdminTable()"></div>
-                        <div class="col-md-5"><select id="offer-filter" class="form-select" onchange="renderAdminTable()">
-                            <option value="All">সব অপারেটর</option><option value="Robi">Robi</option><option value="Airtel">Airtel</option><option value="Banglalink">Banglalink</option><option value="GP">Grameenphone</option>
-                        </select></div>
-                    </div>
-                </div>
-                <div class="table-responsive">
-                    <table class="table table-hover align-middle border">
-                        <thead class="table-dark">
-                            <tr>
-                                <th>অপারেটর</th>
-                                <th>প্যাকেজ ডিটেইলস</th>
-                                <th>মেয়াদ</th>
-                                <th>মূল্য (৳)</th>
-                                <th>অ্যাকশন</th>
-                            </tr>
-                        </thead>
-                        <tbody id="admin-table-body">
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+                <button class="btn btn-sm btn-outline-danger" onclick="clearAllOffers()"><i class="fa-solid fa-trash me-1"></i>সব অফার একবারে মুছে ফেলুন</button>  
+            </div>  
+              
+            <div class="table-responsive">  
+                <table class="table table-hover align-middle border">  
+                    <thead class="table-dark">  
+                        <tr>  
+                            <th>অপারেটর</th>  
+                            <th>প্যাকেজ ডিটেইলস</th>  
+                            <th>মেয়াদ</th>  
+                            <th>মূল্য (৳)</th>  
+                            <th>অ্যাকশন</th>  
+                        </tr>  
+                    </thead>  
+                    <tbody id="admin-table-body">  
+                    </tbody>  
+                </table>  
+            </div>  
+        </div>  
 
-        </div>
-    </div>
+    </div>  
 </div>
 
-<!-- Edit Offer Modal -->
-<div class="modal fade" id="offerEditModal" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title fw-bold">অফার এডিট করুন (Draft)</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body">
-        <input type="hidden" id="edit-offer-index">
-        <div class="mb-3">
-            <label class="form-label fw-bold">অপারেটর</label>
-            <select id="edit-offer-op" class="form-select">
-                <option value="Robi">Robi</option>
-                <option value="Airtel">Airtel</option>
-                <option value="Banglalink">Banglalink</option>
-                <option value="GP">GP</option>
-            </select>
-        </div>
-        <div class="mb-3">
-            <label class="form-label fw-bold">অফারের নাম</label>
-            <input type="text" id="edit-offer-title" class="form-control">
-        </div>
-        <div class="mb-3">
-            <label class="form-label fw-bold">মেয়াদ</label>
-            <input type="text" id="edit-offer-validity" class="form-control">
-        </div>
-        <div class="mb-3">
-            <label class="form-label fw-bold">মূল্য (টাকা)</label>
-            <input type="text" id="edit-offer-price" class="form-control">
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">বন্ধ করুন</button>
-        <button type="button" class="btn btn-primary" onclick="saveEditedOffer()">Draft-এ Save করুন</button>
-      </div>
-    </div>
-  </div>
-</div>
+</div>  <script>  
+    function bnToEnDigits(str) {  
+        const bnDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];  
+        return str.replace(/[০-৯]/g, d => bnDigits.indexOf(d));  
+    }  
+  
+    function saveSiteStatus() {  
+        const siteStatus = document.getElementById('cfg-site-status').value;  
+        const closeMsg = document.getElementById('cfg-site-close-msg').value;  
+        localStorage.setItem('cfg_site_status', siteStatus);  
+        localStorage.setItem('cfg_site_close_msg', closeMsg);  
+        alert('ওয়েবসাইট স্ট্যাটাস সফলভাবে সেভ করা হয়েছে!');  
+    }  
+  
+    function saveBrandingSettings() {  
+        localStorage.setItem('cfg_site_name', document.getElementById('cfg-site-name').value);  
+        localStorage.setItem('cfg_support_text', document.getElementById('cfg-support-text').value);  
+        localStorage.setItem('cfg_hero_title', document.getElementById('cfg-hero-title').value);  
+        localStorage.setItem('cfg_hero_sub', document.getElementById('cfg-hero-sub').value);  
+        localStorage.setItem('cfg_notice_text', document.getElementById('cfg-notice-text').value);  
+        alert('ব্র্যান্ডিং তথ্য সেভ করা হয়েছে!');  
+    }  
+  
+    function saveWASettings() {  
+        localStorage.setItem('cfg_btn_text', document.getElementById('cfg-btn-text').value);  
+        localStorage.setItem('cfg_wa_num', document.getElementById('cfg-wa-num').value);  
+        localStorage.setItem('cfg_wa_msg_template', document.getElementById('cfg-wa-msg-template').value);  
+        alert('অর্ডার ও মেসেজ সেটিংস সেভ করা হয়েছে!');  
+    }  
+  
+    function processSelectedOperatorOffers() {  
+        let text = document.getElementById('ai-text-input').value;  
+        let selectedOperator = document.getElementById('selected-operator').value;  
+  
+        if(!text.trim()) return alert('অনুগ্রহ করে অফারের টেক্সট পেস্ট করুন!');  
+  
+        let lines = text.split('\n');  
+        let currentOffers = JSON.parse(localStorage.getItem('myOffers')) || [];  
+        let addedCount = 0;  
+  
+        let badgeBg = "bg-danger text-white";   
+        if(selectedOperator === "Banglalink") badgeBg = "bg-warning text-dark";  
+        if(selectedOperator === "GP") badgeBg = "bg-info text-dark";  
+  
+        lines.forEach(line => {  
+            let trimmed = line.trim();  
+            if(!trimmed) return;  
+  
+            let convertedLine = bnToEnDigits(trimmed);  
+            let priceMatch = convertedLine.match(/(\d+)\s*(টাকা|tk|bdt)/i) || convertedLine.match(/—\s*(\d+)/);  
+              
+            if(!priceMatch) return;  
+  
+            let price = priceMatch[1];  
+            let daysMatch = convertedLine.match(/(\d+)\s*(দিন|days)/i) || ["", "৩০ দিন"];  
+            let validity = daysMatch[0];  
+  
+            let cleanDetails = trimmed  
+                .replace(/^\d+[\.\)]\s*/, '')  
+                .replace(/—\s*[০-৯\d]+\s*টাকা.*/i, '')  
+                .replace(/—\s*[০-৯\d]+\s*(দিন|days).*/i, '')  
+                .trim();  
+  
+            currentOffers.push({  
+                id: Date.now() + Math.random(),  
+                op: selectedOperator,  
+                title: cleanDetails,  
+                validity: validity,  
+                price: price,  
+                badgeBg: badgeBg  
+            });  
+            addedCount++;  
+        });  
+  
+        localStorage.setItem('myOffers', JSON.stringify(currentOffers));  
+        renderAdminTable();  
+        document.getElementById('ai-text-input').value = '';  
+        alert(`${selectedOperator} অপারেটরে মোট ${addedCount} টি অফার সফলভাবে যোগ করা হয়েছে!`);  
+    }  
+  
+    function renderAdminTable() {  
+        const tbody = document.getElementById('admin-table-body');  
+        const offers = JSON.parse(localStorage.getItem('myOffers')) || [];  
+        const searchQuery = (document.getElementById('search-input')?.value || '').toLowerCase().trim();  
+          
+        tbody.innerHTML = '';  
+  
+        const filteredOffers = offers.filter(item => {  
+            return item.op.toLowerCase().includes(searchQuery) ||  
+                   item.title.toLowerCase().includes(searchQuery) ||  
+                   item.validity.toLowerCase().includes(searchQuery) ||  
+                   item.price.toString().includes(searchQuery);  
+        });  
+  
+        if (filteredOffers.length === 0) {  
+            tbody.innerHTML = `<tr><td colspan="5" class="text-center text-muted py-3">কোনো অফার পাওয়া যায়নি।</td></tr>`;  
+            return;  
+        }  
+  
+        filteredOffers.forEach((item) => {  
+            // আসল অ্যারেতে সঠিক ইনডেক্স খুঁজে বের করা (ডিলিট করার সুবিধার্থে)  
+            let originalIndex = offers.findIndex(o => o.id === item.id);  
+              
+            tbody.innerHTML += `  
+                <tr>  
+                    <td><span class="badge ${item.badgeBg}">${item.op}</span></td>  
+                    <td class="fw-bold">${item.title}</td>  
+                    <td>${item.validity}</td>  
+                    <td class="text-success fw-bold">৳ ${item.price}</td>  
+                    <td><button class="btn btn-sm btn-outline-danger" onclick="deleteSingleOffer(${originalIndex})"><i class="fa-solid fa-trash"></i> ডিলিট</button></td>  
+                </tr>  
+            `;  
+        });  
+    }  
+  
+    function deleteSingleOffer(index) {  
+        let offers = JSON.parse(localStorage.getItem('myOffers')) || [];  
+        offers.splice(index, 1);  
+        localStorage.setItem('myOffers', JSON.stringify(offers));  
+        renderAdminTable();  
+    }  
+  
+    function clearAllOffers() {  
+        if(confirm('সবগুলো অফার মুছে ফেলতে চান?')) {  
+            localStorage.removeItem('myOffers');  
+            renderAdminTable();  
+        }  
+    }  
+  
+    window.onload = function() {  
+        document.getElementById('cfg-site-status').value = localStorage.getItem('cfg_site_status') || "open";  
+        document.getElementById('cfg-site-close-msg').value = localStorage.getItem('cfg_site_close_msg') || "দুঃখিত! আমাদের সার্ভিস সাময়িকভাবে বন্ধ আছে। কিছুক্ষন পর আবার চেষ্টা করুন।";  
+  
+        document.getElementById('cfg-site-name').value = localStorage.getItem('cfg_site_name') || "SAYON CELL BD";  
+        document.getElementById('cfg-support-text').value = localStorage.getItem('cfg_support_text') || "২৪/৭ লাইভ সাপোর্ট";  
+        document.getElementById('cfg-hero-title').value = localStorage.getItem('cfg_hero_title') || "সেরা অফার বেছে নিন নিমিষেই ⚡";  
+        document.getElementById('cfg-hero-sub').value = localStorage.getItem('cfg_hero_sub') || "আপনার নম্বর দিন এবং সরাসরি রিচার্জ করুন";  
+        document.getElementById('cfg-notice-text').value = localStorage.getItem('cfg_notice_text') || "আজকের স্পেশাল ধামাকা অফার! ড্রাইভ প্যাকের রেট সবচেয়ে কম।";  
+  
+        document.getElementById('cfg-btn-text').value = localStorage.getItem('cfg_btn_text') || "অর্ডার নিশ্চিত করুন";  
+        document.getElementById('cfg-wa-num').value = localStorage.getItem('cfg_wa_num') || "8801872900153";  
+        document.getElementById('cfg-wa-msg-template').value = localStorage.getItem('cfg_wa_msg_template') || `السلام عليكم!\nআমি ওয়েবসাইট থেকে অফার অর্ডার করতে চাই:\n\n👤 *গ্রাহকের নাম:* {name}\n📱 *অপারেটর:* {operator}\n📦 *অফার:* {offer}\n💵 *মূল্য:* ৳{price}\n📲 *রিচার্জের নম্বর:* {phone}`;  
+  
+        renderAdminTable();  
+    };  
+</script>  </body>  
+</html>  
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-const OPERATORS=['Robi','Airtel','Banglalink','GP'];
-const DEFAULTS={
- cfg_site_status:'open',
- cfg_site_close_msg:'দুঃখিত! আমাদের সার্ভিস সাময়িকভাবে বন্ধ আছে। কিছুক্ষন পর আবার চেষ্টা করুন।',
- cfg_site_name:'SAYON CELL BD',
- cfg_support_text:'২৪/৭ লাইভ সাপোর্ট',
- cfg_hero_title:'সেরা অফার বেছে নিন নিমিষেই ⚡',
- cfg_hero_sub:'আপনার নম্বর দিন এবং সরাসরি হোয়াটসঅ্যাপ থেকে ড্রাইভ রিচার্জ করুন',
- cfg_notice_text:'আজকের স্পেশাল ধামাকা অফার! ড্রাইভ প্যাকের রেট সবচেয়ে কম।',
- cfg_wa_num:'8801872900153',
- cfg_wa_msg_template:`السلام عليكم!
-আমি ওয়েবসাইট থেকে অফার অর্ডার করতে চাই:
-
-📱 *অপারেটর:* {operator}
-📦 *অফার:* {offer}
-💵 *মূল্য:* ৳{price}
-📲 *রিচার্জের নম্বর:* {phone}`
-};
-
-function bnToEnDigits(str){const d=['০','১','২','৩','৪','৫','৬','৭','৮','৯'];return String(str).replace(/[০-৯]/g,x=>d.indexOf(x));}
-function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));}
-
-function getPublished(k){const v=localStorage.getItem(k);return v===null?DEFAULTS[k]:v;}
-function getDraft(k){const v=localStorage.getItem('draft_'+k);return v===null?getPublished(k):v;}
-function setDraft(k,v){localStorage.setItem('draft_'+k,v);}
-
-function saveOneSetting(k){
- const el=document.getElementById(k); if(!el)return;
- setDraft(k,el.value); 
- localStorage.setItem(k,el.value); // Syncs to live user panel
- el.classList.add('border-success'); 
- setTimeout(()=>el.classList.remove('border-success'),700);
- alert('সেভ হয়েছে। এখন Website/User Panel-এ নতুন তথ্য কার্যকর হয়েছে।');
-}
-
-function getDraftOffers(){
- try{
-   const v=localStorage.getItem('draft_myOffers');
-   return v!==null?(JSON.parse(v)||[]):(JSON.parse(localStorage.getItem('myOffers'))||[]);
- }catch(e){return[];}
-}
-function setDraftOffers(v){localStorage.setItem('draft_myOffers',JSON.stringify(v));}
-
-function getDraftOperatorStatus(){
- try{
-   const v=localStorage.getItem('draft_operator_status');
-   if(v!==null)return JSON.parse(v)||{};
-   const p=localStorage.getItem('operator_status');
-   if(p)return JSON.parse(p)||{};
- }catch(e){}
- const o={};OPERATORS.forEach(x=>o[x]=true);return o;
-}
-
-function saveOperatorStatus(op){
- const s=getDraftOperatorStatus();
- s[op]=document.getElementById('op-'+op).checked;
- localStorage.setItem('draft_operator_status',JSON.stringify(s));
- localStorage.setItem('operator_status',JSON.stringify(s)); // Syncs live status
- renderOperatorControls();
- renderAdminTable();
- alert(`${op} অপারেটরের স্ট্যাটাস Save হয়েছে। Website/User Panel-এ এখন ${s[op]?'চালু':'বন্ধ'}।`);
-}
-
-function renderOperatorControls(){
- const s=getDraftOperatorStatus();
- document.getElementById('operator-controls').innerHTML=OPERATORS.map(op=>`<div class="col-md-6 col-lg-3"><div class="operator-control">
- <div class="d-flex justify-content-between align-items-center"><div><b>${op}</b><div class="small text-muted">${s[op]?'চালু':'বন্ধ'}</div></div>
- <div class="form-check form-switch"><input class="form-check-input" type="checkbox" id="op-${op}" ${s[op]?'checked':''}></div></div>
- <button class="btn btn-outline-dark btn-sm w-100 mt-2" onclick="saveOperatorStatus('${op}')"><i class="fa-solid fa-floppy-disk me-1"></i>${op} Status Save</button>
- </div></div>`).join('');
-}
-
-function processSelectedOperatorOffers(){
- const text=document.getElementById('ai-text-input').value,op=document.getElementById('selected-operator').value;
- if(!text.trim())return alert('অনুগ্রহ করে অফারের টেক্সট পেস্ট করুন!');
- let offers=getDraftOffers(),count=0,badgeBg=op==='Banglalink'?'bg-warning text-dark':op==='GP'?'bg-info text-dark':'bg-danger text-white';
- text.split('\n').forEach(line=>{
-  const t=line.trim();if(!t)return;const c=bnToEnDigits(t);
-  const pm=c.match(/(\d+)\s*(টাকা|tk|bdt)/i)||c.match(/—\s*(\d+)/);if(!pm)return;
-  const dm=c.match(/(\d+)\s*(দিন|days)/i),validity=dm?dm[0]:'৩০ দিন';
-  const title=t.replace(/^\d+[\.\)]\s*/,'').replace(/—\s*[০-৯\d]+\s*টাকা.*/i,'').replace(/—\s*[০-৯\d]+\s*(দিন|days).*/i,'').trim();
-  offers.push({id:Date.now()+Math.random(),op,title,validity,price:pm[1],badgeBg});count++;
- });
- setDraftOffers(offers);
- renderAdminTable();
- document.getElementById('ai-text-input').value='';
- alert(`${op} অপারেটরে ${count} টি অফার Draft-এ যোগ হয়েছে। Website এখনো বদলায়নি।`);
-}
-
-function renderAdminTable(){
- const tbody=document.getElementById('admin-table-body'),search=(document.getElementById('offer-search')?.value||'').toLowerCase
+ 
