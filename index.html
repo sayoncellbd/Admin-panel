@@ -35,77 +35,85 @@
                 <span class="badge bg-warning text-dark px-3 py-2 fs-6 fw-bold"><i class="fa-solid fa-lock-open me-1"></i> ফুল কন্ট্রোল মোড</span>
             </div>
 
-            <!-- ওয়েবসাইট বন্ধ/চালু কন্ট্রোল -->
+            <!-- ওয়েবসাইট ও অপারেটর স্ট্যাটাস কন্ট্রোল -->
             <div class="row">
                 <div class="col-12">
                     <div class="card card-custom p-4 border-warning border-2">
-                        <h5 class="section-header text-danger"><i class="fa-solid fa-power-off text-danger me-2"></i>ওয়েবসাইট স্ট্যাটাস</h5>
-                        <div class="row align-items-center">
+                        <h5 class="section-header text-danger"><i class="fa-solid fa-power-off text-danger me-2"></i>ওয়েবসাইট ও অপারেটর স্ট্যাটাস</h5>
+                        <div class="row align-items-center mb-3">
                             <div class="col-md-4 mb-3 mb-md-0">
                                 <label class="form-label fw-bold">ওয়েবসাইট অবস্থা সিলেক্ট করুন:</label>
                                 <select id="cfg-site-status" class="form-select border-warning fw-bold">
                                     <option value="open">🟢 ওয়েবসাইট চালু রাখুন (Open)</option>
-                                    <option value="closed">🔴 ওয়েবসাইট বন্ধ রাখুন (Closed / Maintenance)</option>
+                                    <option value="closed">🔴 ওয়েবসাইট বন্ধ রাখুন (Closed)</option>
                                 </select>
                             </div>
-                            <div class="col-md-8 mb-3">
+                            <div class="col-md-8">
                                 <label class="form-label fw-bold">ওয়েবসাইট বন্ধ থাকলে দেখানোর নোটিশ:</label>
                                 <input type="text" id="cfg-site-close-msg" class="form-control">
                             </div>
-                            <div class="col-12 mt-2">
-                                <button class="btn btn-gold w-100" onclick="saveSiteStatus()"><i class="fa-solid fa-floppy-disk me-2"></i>ওয়েবসাইট স্ট্যাটাস সেভ করুন</button>
+                        </div>
+
+                        <hr>
+                        <h6 class="fw-bold mb-3"><i class="fa-solid fa-toggle-on text-warning me-2"></i>আলাদা আলাদা অপারেটর চালু / বন্ধ রাখুন:</h6>
+                        <div class="row g-3">
+                            <div class="col-md-3">
+                                <label class="form-label fw-bold">Robi Status:</label>
+                                <select id="status-Robi" class="form-select border-primary fw-bold">
+                                    <option value="active">🟢 চালু</option>
+                                    <option value="inactive">🔴 বন্ধ</option>
+                                </select>
                             </div>
+                            <div class="col-md-3">
+                                <label class="form-label fw-bold">Airtel Status:</label>
+                                <select id="status-Airtel" class="form-select border-danger fw-bold">
+                                    <option value="active">🟢 চালু</option>
+                                    <option value="inactive">🔴 বন্ধ</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label fw-bold">Banglalink Status:</label>
+                                <select id="status-Banglalink" class="form-select border-warning fw-bold">
+                                    <option value="active">🟢 চালু</option>
+                                    <option value="inactive">🔴 বন্ধ</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label fw-bold">Grameenphone Status:</label>
+                                <select id="status-GP" class="form-select border-info fw-bold">
+                                    <option value="active">🟢 চালু</option>
+                                    <option value="inactive">🔴 বন্ধ</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-12 mt-4">
+                            <button class="btn btn-gold w-100" onclick="saveSiteStatus()"><i class="fa-solid fa-floppy-disk me-2"></i>স্ট্যাটাস সেটিংস সেভ করুন</button>
                         </div>
                     </div>
                 </div>
             </div>
 
+            <!-- ব্র্যান্ডিং ও হোয়াটসঅ্যাপ সেটিংস -->
             <div class="row">
-                <!-- ব্র্যান্ডিং সেটিং -->
                 <div class="col-lg-6">
                     <div class="card card-custom p-4">
-                        <h5 class="section-header"><i class="fa-solid fa-globe text-warning me-2"></i>ওয়েবসাইট ব্র্যান্ডিং ও টেক্সট সেটিং</h5>
-                        <div class="mb-3">
-                            <label class="form-label fw-bold">ব্র্যান্ডের নাম:</label>
-                            <input type="text" id="cfg-site-name" class="form-control">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label fw-bold">সাপোর্ট টেক্সট:</label>
-                            <input type="text" id="cfg-support-text" class="form-control">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label fw-bold">ব্যানার হেডিং:</label>
-                            <input type="text" id="cfg-hero-title" class="form-control">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label fw-bold">ব্যানার বিবরণ:</label>
-                            <input type="text" id="cfg-hero-sub" class="form-control">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label fw-bold">লাইভ নোটিশ বার টেক্সট:</label>
-                            <textarea id="cfg-notice-text" class="form-control" rows="2"></textarea>
-                        </div>
+                        <h5 class="section-header"><i class="fa-solid fa-globe text-warning me-2"></i>ব্র্যান্ডিং সেটিং</h5>
+                        <div class="mb-3"><label class="form-label fw-bold">ব্র্যান্ডের নাম:</label><input type="text" id="cfg-site-name" class="form-control"></div>
+                        <div class="mb-3"><label class="form-label fw-bold">সাপোর্ট টেক্সট:</label><input type="text" id="cfg-support-text" class="form-control"></div>
+                        <div class="mb-3"><label class="form-label fw-bold">ব্যানার হেডিং:</label><input type="text" id="cfg-hero-title" class="form-control"></div>
+                        <div class="mb-3"><label class="form-label fw-bold">ব্যানার বিবরণ:</label><input type="text" id="cfg-hero-sub" class="form-control"></div>
+                        <div class="mb-3"><label class="form-label fw-bold">লাইভ নোটিশ বার টেক্সট:</label><textarea id="cfg-notice-text" class="form-control" rows="2"></textarea></div>
                         <button class="btn btn-gold w-100" onclick="saveBrandingSettings()"><i class="fa-solid fa-floppy-disk me-2"></i>ব্র্যান্ডিং তথ্য সেভ করুন</button>
                     </div>
                 </div>
-
-                <!-- হোয়াটসঅ্যাপ সেটিংস -->
                 <div class="col-lg-6">
                     <div class="card card-custom p-4">
-                        <h5 class="section-header"><i class="fa-solid fa-paper-plane text-warning me-2"></i>অর্ডার ও মেসেজ সেটিংস</h5>
-                        <div class="mb-3">
-                            <label class="form-label fw-bold">অর্ডার বাটন টেক্সট:</label>
-                            <input type="text" id="cfg-btn-text" class="form-control border-warning fw-bold">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label fw-bold">হোয়াটসঅ্যাপ নম্বর (কান্ট্রি কোড সহ):</label>
-                            <input type="text" id="cfg-wa-num" class="form-control">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label fw-bold">মেসেজ ফরম্যাট (Dynamic Template):</label>
-                            <textarea id="cfg-wa-msg-template" class="form-control" rows="5"></textarea>
-                        </div>
-                        <button class="btn btn-gold w-100" onclick="saveWASettings()"><i class="fa-solid fa-floppy-disk me-2"></i>অর্ডার ও মেসেজ সেটিংস সেভ করুন</button>
+                        <h5 class="section-header"><i class="fa-solid fa-paper-plane text-warning me-2"></i>মেসেজ সেটিংস</h5>
+                        <div class="mb-3"><label class="form-label fw-bold">অর্ডার বাটন টেক্সট:</label><input type="text" id="cfg-btn-text" class="form-control border-warning fw-bold"></div>
+                        <div class="mb-3"><label class="form-label fw-bold">হোয়াটসঅ্যাপ নম্বর:</label><input type="text" id="cfg-wa-num" class="form-control"></div>
+                        <div class="mb-3"><label class="form-label fw-bold">মেসেজ ফরম্যাট:</label><textarea id="cfg-wa-msg-template" class="form-control" rows="5"></textarea></div>
+                        <button class="btn btn-gold w-100" onclick="saveWASettings()"><i class="fa-solid fa-floppy-disk me-2"></i>অর্ডার সেটিংস সেভ করুন</button>
                     </div>
                 </div>
             </div>
@@ -135,15 +143,27 @@
                 </div>
             </div>
 
-            <!-- লাইভ অফার টেবিল -->
+            <!-- লাইভ অফার টেবিল এবং ডিলিট কন্ট্রোল -->
             <div class="card card-custom p-4">
                 <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
                     <h5 class="section-header mb-0"><i class="fa-solid fa-database text-warning me-2"></i>লাইভ অফারের তালিকা</h5>
-                    <div class="flex-grow-1 mx-md-3" style="max-width: 350px;">
+                    
+                    <div class="flex-grow-1 mx-md-3" style="max-width: 300px;">
                         <input type="text" id="search-input" class="form-control border-warning" placeholder="অফার বা অপারেটর খুঁজুন..." onkeyup="renderAdminTable()">
                     </div>
-                    <button class="btn btn-sm btn-outline-danger" onclick="clearAllOffers()"><i class="fa-solid fa-trash me-1"></i>সব অফার একবারে মুছে ফেলুন</button>
+
+                    <div class="d-flex gap-2 align-items-center">
+                        <select id="delete-op-select" class="form-select border-danger fw-bold" style="width: auto;">
+                            <option value="Robi">Robi</option>
+                            <option value="Airtel">Airtel</option>
+                            <option value="Banglalink">Banglalink</option>
+                            <option value="GP">GP</option>
+                        </select>
+                        <button class="btn btn-danger btn-sm fw-bold" onclick="deleteOperatorOffers()"><i class="fa-solid fa-trash me-1"></i>এর সব অফার মুছুন</button>
+                        <button class="btn btn-outline-danger btn-sm fw-bold" onclick="clearAllOffers()"><i class="fa-solid fa-skull me-1"></i>সব অফার মুছুন</button>
+                    </div>
                 </div>
+
                 <div class="table-responsive">
                     <table class="table table-hover align-middle border">
                         <thead class="table-dark">
@@ -164,7 +184,48 @@
     </div>
 </div>
 
-<!-- Firebase Modular SDK -->
+<!-- এডিট অফার মোডাল -->
+<div class="modal fade" id="editModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="border-radius: 16px;">
+            <div class="modal-header bg-warning text-dark">
+                <h5 class="modal-title fw-bold"><i class="fa-solid fa-pen-to-square me-2"></i>অফার এডিট করুন</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="edit-id">
+                <div class="mb-3">
+                    <label class="form-label fw-bold">অপারেটর:</label>
+                    <select id="edit-op" class="form-select border-warning">
+                        <option value="Robi">Robi</option>
+                        <option value="Airtel">Airtel</option>
+                        <option value="Banglalink">Banglalink</option>
+                        <option value="GP">GP</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold">প্যাকেজ ডিটেইলস:</label>
+                    <input type="text" id="edit-title" class="form-control border-warning">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold">মেয়াদ:</label>
+                    <input type="text" id="edit-validity" class="form-control border-warning">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold">মূল্য (৳):</label>
+                    <input type="number" id="edit-price" class="form-control border-warning">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">বাতিল</button>
+                <button type="button" class="btn btn-warning fw-bold" onclick="saveEditedOffer()">সেভ করুন</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
   import { getDatabase, ref, set, get, update, remove, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
@@ -183,24 +244,30 @@
   const db = getDatabase(app);
 
   let currentOffers = [];
+  let editModalObj = null;
 
   function bnToEnDigits(str) {
       const bnDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
       return str.replace(/[০-৯]/g, d => bnDigits.indexOf(d));
   }
 
-  // Load Settings from Firebase
   function loadConfig() {
       get(ref(db, 'config')).then((snapshot) => {
           if (snapshot.exists()) {
               const data = snapshot.val();
               document.getElementById('cfg-site-status').value = data.site_status || "open";
-              document.getElementById('cfg-site-close-msg').value = data.site_close_msg || "দুঃখিত! আমাদের সার্ভিস সাময়িকভাবে বন্ধ আছে। কিছুক্ষন পর আবার চেষ্টা করুন।";
+              document.getElementById('cfg-site-close-msg').value = data.site_close_msg || "দুঃখিত! সার্ভিস সাময়িকভাবে বন্ধ আছে।";
+              
+              document.getElementById('status-Robi').value = data.op_Robi || "active";
+              document.getElementById('status-Airtel').value = data.op_Airtel || "active";
+              document.getElementById('status-Banglalink').value = data.op_Banglalink || "active";
+              document.getElementById('status-GP').value = data.op_GP || "active";
+
               document.getElementById('cfg-site-name').value = data.site_name || "SAYON CELL BD";
               document.getElementById('cfg-support-text').value = data.support_text || "২৪/৭ লাইভ সাপোর্ট";
               document.getElementById('cfg-hero-title').value = data.hero_title || "সেরা অফার বেছে নিন নিমিষেই ⚡";
               document.getElementById('cfg-hero-sub').value = data.hero_sub || "আপনার নম্বর দিন এবং সরাসরি রিচার্জ করুন";
-              document.getElementById('cfg-notice-text').value = data.notice_text || "আজকের স্পেশাল ধামাকা অফার! ড্রাইভ প্যাকের রেট সবচেয়ে কম।";
+              document.getElementById('cfg-notice-text').value = data.notice_text || "আজকের স্পেশাল ধামাকা অফার!";
               document.getElementById('cfg-btn-text').value = data.btn_text || "অর্ডার নিশ্চিত করুন";
               document.getElementById('cfg-wa-num').value = data.wa_num || "8801872900153";
               document.getElementById('cfg-wa-msg-template').value = data.wa_msg_template || `السلام عليكم!\nআমি ওয়েবসাইট থেকে অফার অর্ডার করতে চাই:\n\n👤 *গ্রাহকের নাম:* {name}\n📱 *অপারেটর:* {operator}\n📦 *অফার:* {offer}\n💵 *মূল্য:* ৳{price}\n📲 *রিচার্জের নম্বর:* {phone}`;
@@ -208,7 +275,6 @@
       });
   }
 
-  // Realtime Sync for Offers in Admin Table
   onValue(ref(db, 'offers'), (snapshot) => {
       const data = snapshot.val();
       currentOffers = [];
@@ -223,8 +289,12 @@
   window.saveSiteStatus = function() {
       update(ref(db, 'config'), {
           site_status: document.getElementById('cfg-site-status').value,
-          site_close_msg: document.getElementById('cfg-site-close-msg').value
-      }).then(() => alert('ওয়েবসাইট স্ট্যাটাস সেভ হয়েছে!'));
+          site_close_msg: document.getElementById('cfg-site-close-msg').value,
+          op_Robi: document.getElementById('status-Robi').value,
+          op_Airtel: document.getElementById('status-Airtel').value,
+          op_Banglalink: document.getElementById('status-Banglalink').value,
+          op_GP: document.getElementById('status-GP').value
+      }).then(() => alert('স্ট্যাটাস সেটিংস সেভ হয়েছে!'));
   };
 
   window.saveBrandingSettings = function() {
@@ -248,7 +318,6 @@
   window.processSelectedOperatorOffers = function() {
       let text = document.getElementById('ai-text-input').value;
       let selectedOperator = document.getElementById('selected-operator').value;
-
       if(!text.trim()) return alert('অনুগ্রহ করে অফারের টেক্সট পেস্ট করুন!');
 
       let lines = text.split('\n');
@@ -278,60 +347,4 @@
           let newOfferRef = ref(db, 'offers/' + Date.now() + "_" + Math.floor(Math.random() * 1000));
           promises.push(set(newOfferRef, {
               op: selectedOperator,
-              title: cleanDetails,
-              validity: validity,
-              price: price,
-              badgeBg: badgeBg
-          }));
-      });
-
-      Promise.all(promises).then(() => {
-          document.getElementById('ai-text-input').value = '';
-          alert('অফারগুলো লাইভ ডেটাবেসে যুক্ত করা হয়েছে!');
-      });
-  };
-
-  window.renderAdminTable = function() {
-      const tbody = document.getElementById('admin-table-body');
-      const searchQuery = (document.getElementById('search-input')?.value || '').toLowerCase().trim();
-      tbody.innerHTML = '';
-
-      const filteredOffers = currentOffers.filter(item => {
-          return item.op.toLowerCase().includes(searchQuery) ||
-                 item.title.toLowerCase().includes(searchQuery) ||
-                 item.validity.toLowerCase().includes(searchQuery) ||
-                 item.price.toString().includes(searchQuery);
-      });
-
-      if (filteredOffers.length === 0) {
-          tbody.innerHTML = `<tr><td colspan="5" class="text-center text-muted py-3">কোনো অফার পাওয়া যায়নি।</td></tr>`;
-          return;
-      }
-
-      filteredOffers.forEach((item) => {
-          tbody.innerHTML += `
-              <tr>
-                  <td><span class="badge ${item.badgeBg}">${item.op}</span></td>
-                  <td class="fw-bold">${item.title}</td>
-                  <td>${item.validity}</td>
-                  <td class="text-success fw-bold">৳ ${item.price}</td>
-                  <td><button class="btn btn-sm btn-outline-danger" onclick="deleteSingleOffer('${item.firebaseId}')"><i class="fa-solid fa-trash"></i> ডিলিট</button></td>
-              </tr>
-          `;
-      });
-  };
-
-  window.deleteSingleOffer = function(key) {
-      remove(ref(db, 'offers/' + key));
-  };
-
-  window.clearAllOffers = function() {
-      if(confirm('সবগুলো অফার স্থায়ীভাবে মুছে ফেলতে চান?')) {
-          remove(ref(db, 'offers'));
-      }
-  };
-
-  window.onload = loadConfig;
-</script>
-</body>
-</html>
+              
