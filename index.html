@@ -74,16 +74,8 @@
                             <input type="text" id="cfg-support-text" class="form-control">
                         </div>
                         <div class="mb-3">
-                            <label class="form-label fw-bold">ব্যানার হেডিং:</label>
-                            <input type="text" id="cfg-hero-title" class="form-control">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label fw-bold">ব্যানার বিবরণ:</label>
-                            <input type="text" id="cfg-hero-sub" class="form-control">
-                        </div>
-                        <div class="mb-3">
                             <label class="form-label fw-bold">লাইভ নোটিশ বার টেক্সট:</label>
-                            <textarea id="cfg-notice-text" class="form-control" rows="2"></textarea>
+                            <textarea id="cfg-notice-text" class="form-control" rows="3"></textarea>
                         </div>
                         <button class="btn btn-gold w-100" onclick="saveBrandingSettings()"><i class="fa-solid fa-floppy-disk me-2"></i>ব্র্যান্ডিং তথ্য সেভ করুন</button>
                     </div>
@@ -103,7 +95,7 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-bold">মেসেজ ফরম্যাট (Dynamic Template):</label>
-                            <textarea id="cfg-wa-msg-template" class="form-control" rows="5"></textarea>
+                            <textarea id="cfg-wa-msg-template" class="form-control" rows="4"></textarea>
                         </div>
                         <button class="btn btn-gold w-100" onclick="saveWASettings()"><i class="fa-solid fa-floppy-disk me-2"></i>অর্ডার ও মেসেজ সেটিংস সেভ করুন</button>
                     </div>
@@ -126,7 +118,7 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-bold">২. অফারের তালিকা পেস্ট করুন:</label>
-                            <textarea id="ai-text-input" class="form-control" rows="6"></textarea>
+                            <textarea id="ai-text-input" class="form-control" rows="6" placeholder="যেমন: 50GB + 1000 Mins — 30 Days — 599 Tk"></textarea>
                         </div>
                         <button class="btn btn-gold w-100 fs-5" onclick="processSelectedOperatorOffers()">
                             <i class="fa-solid fa-plus-circle me-2"></i>সিলেক্ট করা অপারেটরে অফার যুক্ত করুন
@@ -198,8 +190,6 @@
               document.getElementById('cfg-site-close-msg').value = data.site_close_msg || "দুঃখিত! আমাদের সার্ভিস সাময়িকভাবে বন্ধ আছে। কিছুক্ষন পর আবার চেষ্টা করুন।";
               document.getElementById('cfg-site-name').value = data.site_name || "SAYON CELL BD";
               document.getElementById('cfg-support-text').value = data.support_text || "২৪/৭ লাইভ সাপোর্ট";
-              document.getElementById('cfg-hero-title').value = data.hero_title || "সেরা অফার বেছে নিন নিমিষেই ⚡";
-              document.getElementById('cfg-hero-sub').value = data.hero_sub || "আপনার নম্বর দিন এবং সরাসরি রিচার্জ করুন";
               document.getElementById('cfg-notice-text').value = data.notice_text || "আজকের স্পেশাল ধামাকা অফার! ড্রাইভ প্যাকের রেট সবচেয়ে কম।";
               document.getElementById('cfg-btn-text').value = data.btn_text || "অর্ডার নিশ্চিত করুন";
               document.getElementById('cfg-wa-num').value = data.wa_num || "8801872900153";
@@ -231,8 +221,6 @@
       update(ref(db, 'config'), {
           site_name: document.getElementById('cfg-site-name').value,
           support_text: document.getElementById('cfg-support-text').value,
-          hero_title: document.getElementById('cfg-hero-title').value,
-          hero_sub: document.getElementById('cfg-hero-sub').value,
           notice_text: document.getElementById('cfg-notice-text').value
       }).then(() => alert('ব্র্যান্ডিং তথ্য সেভ হয়েছে!'));
   };
@@ -334,5 +322,5 @@
   window.onload = loadConfig;
 </script>
 </body>
-    </html>
-    
+</html>
+
