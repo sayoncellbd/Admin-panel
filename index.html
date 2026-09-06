@@ -152,6 +152,7 @@
                         <input type="text" id="search-input" class="form-control border-warning" placeholder="অফার বা অপারেটর খুঁজুন..." onkeyup="renderAdminTable()">
                     </div>
 
+                    <!-- নির্দিষ্ট অপারেটরের সব মুছে ফেলার অপশন -->
                     <div class="d-flex gap-2 align-items-center">
                         <select id="delete-op-select" class="form-select border-danger fw-bold" style="width: auto;">
                             <option value="Robi">Robi</option>
@@ -226,6 +227,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
+<!-- Firebase Modular SDK -->
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
   import { getDatabase, ref, set, get, update, remove, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
@@ -344,7 +346,4 @@
               .replace(/—\s*[০-৯\d]+\s*(দিন|days).*/i, '')
               .trim();
 
-          let newOfferRef = ref(db, 'offers/' + Date.now() + "_" + Math.floor(Math.random() * 1000));
-          promises.push(set(newOfferRef, {
-              op: selectedOperator,
-              
+          let newOfferRef = ref(db, 'offers/' + Date.now() + "_" + Math.floor(Math.random() * 100
